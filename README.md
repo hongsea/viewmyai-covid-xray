@@ -17,7 +17,7 @@
 ``` bash
 cd viewmyai-covid-xray
 # run virtual environments
-python3 -m venv tutorial-env
+python3 -m venv env
 # activate
 source tutorial-env/bin/activate
 # install dependencies
