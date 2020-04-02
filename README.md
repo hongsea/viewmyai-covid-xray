@@ -17,9 +17,9 @@
 ``` bash
 cd viewmyai-covid-xray
 # run virtual environments
-python3 -m venv env
+python3 -m venv  v
 # activate
-source tutorial-env/bin/activate
+source env/bin/activate
 # install dependencies
 pip3 install -r requirments.txt
 # serve with hot reload at localhost:5000
