@@ -45,7 +45,6 @@ var chartContainer = document.getElementById("chart-container");
 
 function submitImage() {
   // action for the submit button
-  console.log("submit");
 
   if (!imageDisplay.src || !imageDisplay.src.startsWith("data")) {
     window.alert("Please select an image before submit.");
@@ -131,52 +130,50 @@ function displayImage(image, id) {
 
 function displayResult(data) {
   // display the result
-  // imageDisplay.classList.remove("loading");
   hide(loader);
-  if (data.error){
+  if (data.result == "NOT DETECTED") {
     predResult.innerHTML = data.result + "<br><br>" + data.error;
-  }else{
-    predResult.innerHTML = data.result + "<br><br>Type: " + data.type + "<br>Confidence: " + data.probability;
+  } else {
+    if (data.condition_similarity_rate){
+      chart = Highcharts.chart('chart-container', {
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+          },
+          title: {text: 'Condition rate'},
+          tooltip: {pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'},
+          accessibility: {
+              point: {
+                  valueSuffix: '%'
+              }
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: true,
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                      style: {
+                          fontSize: 14
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Brands',
+              colorByPoint: true,
+              data: data.condition_similarity_rate
+          }]
+      });
+      }
   }
-  if (data.condition_similarity_rate){
-    chart = Highcharts.chart('chart-container', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {text: 'Condition similarity rate'},
-        tooltip: {pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'},
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        fontSize: 14
-                    }
-                }
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: data.condition_similarity_rate
-        }]
-    });
-    }
     if (window.screen.width < 600)
     chart.setSize(window.screen.width-10);
-  show(predResult);
   show(chartContainer);
+  show(predResult);
 }
 
 function hide(el) {

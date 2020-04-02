@@ -32,21 +32,16 @@ def predict():
     means = rgb_image_np.mean(axis=(0, 1))
     if 35 < np.average(stds) < 95 and 60 < np.average(means) < 180:
         img_result = x_ray.predict(img)
-        file_name = "%s/%s/%s(%s).jpg" % (
-            img_result['result'],
-            img_result['type'],
-            str(uuid.uuid4()),
-            str((img_result['probability']))
-        )
-
+            
         condition_similarity_rate = []
-        for name, prob in img_result['condition similarity rate']:
-            condition_similarity_rate.append({'y': round(float(prob), 2), 'name': name})
-
+        for name, prob in img_result['condition rate']:
+            if round(float(prob), 4) == 0:
+                return jsonify(
+                    result='NOT DETECTED',
+                    error='Invalid image'
+                ), 200
+            condition_similarity_rate.append({'y': round(float(prob), 3), 'name': name})
         return jsonify(
-            result=img_result['result'],
-            type=img_result['type'],
-            probability=str(round(img_result['probability'], 2)) + "%",
             condition_similarity_rate=condition_similarity_rate
         ), 200
     else:
