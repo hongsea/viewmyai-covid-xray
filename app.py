@@ -7,11 +7,12 @@ from gevent.pywsgi import WSGIServer
 from chexnet.chexnet import Xray
 from util import base64_to_pil, np_to_base64, base64_to_bytes
 import numpy as np
+import torch
 iron['BUCKET_NAME'] if 'BUCKET_NAME' in os.environ else 'covid'
 
 app = Flask(__name__)
 CORS(app)
-
+np.set_printoptions(suppress=True)
 
 
 @app.route('/', methods=['GET'])
@@ -32,14 +33,41 @@ def predict():
     means = rgb_image_np.mean(axis=(0, 1))
     if 35 < np.average(stds) < 95 and 60 < np.average(means) < 180:
         img_result = x_ray.predict(img)
-            
         condition_similarity_rate = []
         for name, prob in img_result['condition rate']:
-            if round(float(prob), 4) == 0:
+            if img_result['condition rate'][0][1] == 1.0:
+                condition_similarity_rate.append({'y': 0.99, 'name': name})
+                return jsonify(
+                    condition_similarity_rate=condition_similarity_rate
+                ), 200
+
+            if  prob < 0.000001 and name == "NORMAL":
+                print(prob,name,"NORMAL")
                 return jsonify(
                     result='NOT DETECTED',
                     error='Invalid image'
                 ), 200
+                
+            elif  prob < 0.00001 and name == "COVID-19":
+                print(prob,name,"COVID-19")
+                return jsonify(
+                    result='NOT DETECTED',
+                    error='Invalid image'
+                ), 200
+                
+            elif prob < 0.0001 and name == "Pneumonia":
+                print(prob,name,"Pneumonia")
+                return jsonify(
+                    result='NOT DETECTED',
+                    error='Invalid image'
+                ), 200
+            else:
+                if prob < 0.90 and name == "COVID-19":
+                    return jsonify(
+                        result='NOT DETECTED',
+                        error='Invalid image'
+                    ), 200
+                
             condition_similarity_rate.append({'y': round(float(prob), 3), 'name': name})
         return jsonify(
             condition_similarity_rate=condition_similarity_rate

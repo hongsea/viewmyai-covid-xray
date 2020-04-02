@@ -38,6 +38,11 @@ var uploadCaption = document.getElementById("upload-caption");
 var predResult = document.getElementById("pred-result");
 var loader = document.getElementById("loader");
 var chartContainer = document.getElementById("chart-container");
+var getColor = {
+  'AB': '#FF0000',
+  'BC': '#87CEEB',
+  'CL': '#000000', 
+};
 
 //========================================================================
 // Main button events
@@ -134,6 +139,7 @@ function displayResult(data) {
   if (data.result == "NOT DETECTED") {
     predResult.innerHTML = data.result + "<br><br>" + data.error;
   } else {
+    console.log(data.condition_similarity_rate[0].y);
     if (data.condition_similarity_rate){
       chart = Highcharts.chart('chart-container', {
           chart: {
@@ -165,7 +171,21 @@ function displayResult(data) {
           series: [{
               name: 'Brands',
               colorByPoint: true,
-              data: data.condition_similarity_rate
+              data: [
+                {
+                    name: 'COVID-19',
+                    y: data.condition_similarity_rate[0].y,
+                    color: getColor['AB']
+                }, {
+                    name: 'NORMAL',
+                    y:data.condition_similarity_rate[1].y,
+                    color: getColor['BC']
+                }, {
+                    name: 'Pneumonia',
+                    y: data.condition_similarity_rate[2].y,
+                    color: getColor['CL']
+                },
+              ]
           }]
       });
       }

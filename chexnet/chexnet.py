@@ -5,8 +5,10 @@ from fastai import *
 from fastai.vision import *
 from fastai.metrics import error_rate  
 
+
 class Xray:
     def __init__(self, gpu=False):
+        torch.set_printoptions(precision=4)
         self.CLASS_NAMES = ['COVID-19','NORMAL','Pneumonia']
         # EFFNET
         corona_images_path = 'covid-dataset/'
@@ -21,7 +23,7 @@ class Xray:
     def predict_dense(self, image):
         image = Image(pil2tensor(image, dtype=np.float32).div_(255))
         out = self.learn.predict(image)
-        return out[2]
+        return out[2].numpy()
 
     def predict(self, image):
         image = image.convert("RGB")
