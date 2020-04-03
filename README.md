@@ -8,7 +8,9 @@
 <h4 align="center">COVID 19 X RAY SCANNER
 
 ## DATASETS
-  Download the dataset and extract it under project folder [link](https://drive.google.com/file/d/1j3qOj4VYKRHpUiQ9iP1Pag_l9wL06KuP/view?usp=sharing)
+  Download the covid dataset and extract it under project folder [link](https://drive.google.com/file/d/1iCdBP6F7xfqQH77eeclTRkOimMRjv237/view?usp=sharing)
+  
+ Download the xray dataset and extract it under project folder [link](https://drive.google.com/file/d/1lLNaiPtQwMDvn2ON_7dZRX8XiQRqTW6C/view?usp=sharing)
 ## Backend
    - FLASK
 
