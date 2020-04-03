@@ -139,7 +139,6 @@ function displayResult(data) {
   if (data.result == "NOT DETECTED") {
     predResult.innerHTML = data.result + "<br><br>" + data.error;
   } else {
-    console.log(data.condition_similarity_rate[0].y);
     if (data.condition_similarity_rate){
       chart = Highcharts.chart('chart-container', {
           chart: {
@@ -173,16 +172,16 @@ function displayResult(data) {
               colorByPoint: true,
               data: [
                 {
-                    name: data.condition_similarity_rate[0].name,
+                    name: "COVID-19",
                     y: data.condition_similarity_rate[0].y,
                     color: getColor['AB']
                 }, {
                     name: 'NORMAL',
-                    y:data.data.condition_similarity_rate[0].name,
+                    y: data.condition_similarity_rate[1].y,
                     color: getColor['BC']
                 }, {
                     name: 'Pneumonia',
-                    y: data.condition_similarity_rate[0].name,
+                    y: data.condition_similarity_rate[2].y,
                     color: getColor['CL']
                 },
               ]
