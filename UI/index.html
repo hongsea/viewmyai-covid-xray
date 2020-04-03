@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CovidX-Ray</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/main_style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark nav-bar-maincolor">
+        <div class="container">
+            <a class="navbar-brand" href="#">Covid X-Ray</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+                aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a href="#help-center"><button class="btn btn-warning">Need Help</button></a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="main-content container-fluid">
+        <div class="container main-panel-margin">
+            <div class="main">
+                <div class="panel">
+                    <input id="file-upload" class="hidden" type="file" accept="image/x-png,image/gif,image/jpeg" />
+                    <label for="file-upload" id="file-drag" class="upload-box">
+                        <div id="upload-caption">Drop image here or click to select</div>
+                        <img id="image-preview" class="hidden" />
+                    </label>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <input type="button" value="Submit" class="button" onclick="submitImage();" />
+                    <input type="button" value="Clear" class="button" onclick="clearImage();" />
+                </div>
+
+                <div id="result-box">
+                    <div id="image-box">
+                        <img id="image-display" />
+                        <div id="pred-result" class="hidden"></div>
+                        <svg id="loader" class="hidden" viewBox="0 0 32 32" width="32" height="32">
+                            <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+                        </svg>
+                    </div>
+                    <div id="chart-container"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <section class="info-content" id="help-center">
+        <div class="container info-text-margin">
+            <h2 class="text-center">Help Center</h2>
+        </div>
+        <div class="container">
+            <div class="info-card-section">
+                <div class="row">
+                    <div class="col-md-4 card-margin">
+                        <div class="card card-style">
+                            <img class="card-img-top image-style" src="./pictures/stayhome.jpg" alt="Card image"
+                                style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">How to protect yourself</h4>
+                                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est
+                                    exercitationem eos doloremque autem repudiandae, porro hic qui facilis non ullam
+                                    consectetur architecto culpa distinctio, explicabo nihil ipsum id quibusdam
+                                    voluptas?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 card-margin">
+                        <div class="card card-style">
+                            <img class="card-img-top image-style" src="./pictures/stayhome.jpg" alt="Card image">
+                            <div class="card-body">
+                                <h4 class="card-title">How to get help</h4>
+                                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est
+                                    exercitationem eos doloremque autem repudiandae, porro hic qui facilis non ullam
+                                    consectetur architecto culpa distinctio, explicabo nihil ipsum id quibusdam
+                                    voluptas?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 card-margin">
+                        <div class="card card-style">
+                            <img class="card-img-top image-style" src="./pictures/stayhome.jpg" alt="Card image"
+                                style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">what is the symptom</h4>
+                                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est
+                                    exercitationem eos doloremque autem repudiandae, porro hic qui facilis non ullam
+                                    consectetur architecto culpa distinctio, explicabo nihil ipsum id quibusdam
+                                    voluptas?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer style="margin-top: 35px;">
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="#">CovidX-Ray</a>
+        </div>
+
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
