@@ -36,7 +36,10 @@ def predict():
         condition_similarity_rate = []
         for name, prob in img_result['condition rate']:
             if img_result['condition rate'][0][1] == 1.0:
+                print("dd+++")
                 condition_similarity_rate.append({'y': 0.99, 'name': name})
+                condition_similarity_rate.append({'y': 0.01, 'name': "NORMAL"})
+                condition_similarity_rate.append({'y': 0.01, 'name': "Pneumonia"})
                 return jsonify(
                     condition_similarity_rate=condition_similarity_rate
                 ), 200
@@ -48,7 +51,7 @@ def predict():
                     error='Invalid image'
                 ), 200
                 
-            elif  prob < 0.00001 and name == "COVID-19":
+            elif  prob < 0.0001 and name == "COVID-19":
                 print(prob,name,"COVID-19")
                 return jsonify(
                     result='NOT DETECTED',
@@ -62,7 +65,8 @@ def predict():
                     error='Invalid image'
                 ), 200
             else:
-                if prob < 0.90 and name == "COVID-19":
+                if 0.70 < prob < 0.90 and name == "COVID-19":
+                    print(prob,name,"NORMAL")
                     return jsonify(
                         result='NOT DETECTED',
                         error='Invalid image'

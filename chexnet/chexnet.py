@@ -29,8 +29,7 @@ class Xray:
         image = image.convert("RGB")
         disease_proba = self.predict_dense(image)
         disease_proba = list(zip(self.CLASS_NAMES, disease_proba))
-        disease_proba.sort(key=lambda x: x[1], reverse=True)
-        
+
         r = {"condition rate": disease_proba}
         return r
 
