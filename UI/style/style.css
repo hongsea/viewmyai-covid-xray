@@ -10,7 +10,9 @@
 }
 
 .main-content{
-    background-color: whitesmoke;
+    background-color: rgb(255, 255, 255);
+    background-image: url('../pictures/mainbackground.png');
+    background-size: cover;
 }
 .footer-copyright{
     background-color: rgb(238, 238, 238);
@@ -37,4 +39,15 @@
 
 .image-style{
     max-height:200px; width:100%;object-fit: cover; 
+}
+
+.insert-picture-style{
+    background-color: aliceblue;
+}
+.inside-why-layout{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.why-content-center{
+    min-height: 300px;
 }
